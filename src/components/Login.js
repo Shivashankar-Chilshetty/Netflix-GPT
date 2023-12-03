@@ -8,13 +8,16 @@ import {
 } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
-
+import { useDispatch } from "react-redux";
+import { addUser } from "../utils/userSlice";
+  
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
   const name = useRef(null);
   const email = useRef(null);
   const password = useRef(null);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const toggleSignInForm = () => {
     setIsSignInForm(!isSignInForm);
@@ -39,15 +42,23 @@ const Login = () => {
           const user = userCredential.user;
           updateProfile(user, {
             displayName: name.current.value,
-            photoURL: "https://www.google.com/imgres?imgurl=https%3A%2F%2Fwallpapers.com%2Fimages%2Fhd%2Firon-man-pictures-k83lqhe6vnh95b1m.jpg&tbnid=3-2Q1QO9wciMTM&vet=12ahUKEwiTl7y8tPKCAxW4TGwGHfIdAUwQMygFegQIARB1..i&imgrefurl=https%3A%2F%2Fwallpapers.com%2Firon-man-pictures&docid=bnkvBH5wTNxy0M&w=1600&h=906&q=iron%20man&ved=2ahUKEwiTl7y8tPKCAxW4TGwGHfIdAUwQMygFegQIARB1",
+            photoURL: "",
           })
             .then(() => {
+              const { uid, email, displayName, photoURL } = auth.currentUser;
+              dispatch(
+                addUser({
+                  uid: uid,
+                  email: email,
+                  displayName: displayName,
+                  photoURL: photoURL,
+                })
+              );
               navigate("/browse");
             })
             .catch((error) => {
               setErrorMessage(error.message);
             });
-          console.log(user);
         })
         .catch((error) => {
           const errorCode = error.code;
