@@ -2,7 +2,11 @@ export const LOGO = "https://cdn.cookielaw.org/logos/dd6b162f-1a32-456a-9cfe-897
 export const BG_IMG = "https://assets.nflxext.com/ffe/siteui/vlv3/77d35039-751f-4c3e-9c8d-1240c1ca6188/cf244808-d722-428f-80a9-052acdf158ec/IN-en-20231106-popsignuptwoweeks-perspective_alpha_website_small.jpg";
 export const USER_AVATAR = "";
 export const IMG_CDN_URL = "https://image.tmdb.org/t/p/w780";
-
+export const SUPPORTED_LANGUAGES = [
+  {identifier: "en", name: "English"},
+  {identifier: "hindi", name: "Hindi"},
+  {identifier: "spanish", name: "Spanish"}
+]
 
 export const API_OPTIONS = {
     method: 'GET',
