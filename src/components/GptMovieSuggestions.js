@@ -9,8 +9,8 @@ const GptMovieSuggestions = () => {
       <div>
         {movieNames.map((movieName, index) => (
           <MovieList
-            key={movieNames}
-            title={movieNames}
+            key={movieName}
+            title={movieName}
             movies={movieResults[index]}
           />
         ))}
